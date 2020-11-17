@@ -5,7 +5,12 @@
 */
 
 const axiosPromise = axios.get("https://api.github.com/users/JoshSchuster")
-                          //.then((r) => console.log("success!", r.data.html_url))
+                          .then((r) => {
+                            //step 4
+                            const entryPoint = document.querySelector('.cards')
+                            entryPoint.appendChild(gitHubCard(r))
+                          })
+                          .catch((err) => console.log(err))
 
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
@@ -22,6 +27,8 @@ console.log(axiosPromise)
 /*
   STEP 4: Pass the data received from Github into your function,
     and append the returned markup to the DOM as a child of .cards
+
+    -complete
 */
 
 /*
@@ -88,7 +95,7 @@ const gitHubCard = (object) => {
   a.textContent = object.data.html_url
   followers.textContent = 'Followers: ' + object.data.followers
   following.textContent = 'Following: ' + object.data.following
-  bio.textContent = object.data.bio
+  bio.textContent = 'Bio: ' + object.data.bio
 
   //assign href for a
   a.href = object.data.html_url
