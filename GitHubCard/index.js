@@ -22,7 +22,7 @@ const axiosPromise = axios.get("https://api.github.com/users/JoshSchuster")
     Skip to STEP 3.
 */
 
-console.log(axiosPromise)
+console.log(axiosPromise) //verify that we are getting the data
 
 /*
   STEP 4: Pass the data received from Github into your function,
@@ -42,7 +42,16 @@ console.log(axiosPromise)
     user, and adding that card to the DOM.
 */
 
-const followersArray = [];
+const followersArray = ['tetondan', 'dustinmyers', 'justsml', 'luishrd', 'bigknell']
+
+followersArray.forEach(item => {
+  axios.get("https://api.github.com/users/" + item)
+        .then((r) => {
+          const entryPoint = document.querySelector('.cards')
+          entryPoint.appendChild(gitHubCard(r))
+        })
+        .catch((err) => console.log(err))
+})
 
 /*
   STEP 3: Create a function that accepts a single object as its only argument.
