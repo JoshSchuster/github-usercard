@@ -5,7 +5,7 @@
 */
 
 const axiosPromise = axios.get("https://api.github.com/users/JoshSchuster")
-console.log(axiosPromise)
+                          //.then((r) => console.log("success!", r.data.html_url))
 
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
@@ -16,6 +16,8 @@ console.log(axiosPromise)
 
     Skip to STEP 3.
 */
+
+console.log(axiosPromise)
 
 /*
   STEP 4: Pass the data received from Github into your function,
@@ -54,6 +56,59 @@ const followersArray = [];
       </div>
     </div>
 */
+
+const gitHubCard = (object) => {
+  //create elements
+  const card = document.createElement('div')
+  const img = document.createElement('img')
+  const divCardInfo = document.createElement('div')
+  const h3 = document.createElement('h3')
+  const username = document.createElement('p')
+  const location = document.createElement('p')
+  const profile = document.createElement('p')
+  const a = document.createElement('a')
+  const followers = document.createElement('p')
+  const following = document.createElement('p')
+  const bio = document.createElement('p')
+
+  //add class names
+  card.classList.add('card')
+  divCardInfo.classList.add('card-info')
+  h3.classList.add('name')
+  username.classList.add('username')
+
+  //assign image src 
+  img.src = object.data.avatar_url
+
+  //assign text content
+  h3.textContent = object.data.name
+  username.textContent = object.data.login
+  location.textContent = 'Location: ' + object.data.location
+  profile.textContent = 'Profile: '
+  a.textContent = object.data.html_url
+  followers.textContent = 'Followers: ' + object.data.followers
+  following.textContent = 'Following: ' + object.data.following
+  bio.textContent = object.data.bio
+
+  //assign href for a
+  a.href = object.data.html_url
+
+  //append elements
+  card.appendChild(img)
+  card.appendChild(divCardInfo)
+
+  divCardInfo.appendChild(h3)
+  divCardInfo.appendChild(username)
+  divCardInfo.appendChild(location)
+  divCardInfo.appendChild(profile)
+  divCardInfo.appendChild(followers)
+  divCardInfo.appendChild(following)
+  divCardInfo.appendChild(bio)
+
+  profile.appendChild(a)
+
+  return card
+}
 
 /*
   List of LS Instructors Github username's:
